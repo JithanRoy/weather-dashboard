@@ -38,10 +38,11 @@ const useWeather = () => {
       }
 
       const data = await response.json();
+      console.log(data);
 
       const updateWeatherData = {
         ...weatherData,
-        location: data?.location,
+        location: data?.name,
         climate: data?.weather[0]?.main,
         temperature: data?.main?.temp,
         maxTemperature: data?.main?.temp_max,
