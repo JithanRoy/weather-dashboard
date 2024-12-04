@@ -2,14 +2,23 @@ import RedHeartIcon from "../../assets/heart-red.svg";
 import HeartIcon from "../../assets/heart.svg";
 import { useContext, useState } from "react";
 import { FavouriteContext } from "../../context/index.js";
+import {useWeather} from "../../hooks/index.js";
 
 export default function AddToFavourite() {
   const { addToFavourite, removeFromFavourite, favourites } =
     useContext(FavouriteContext);
-  const [favourite, toggleFavourite] = useState(false);
+  const [isFavourite, toggleFavourite] = useState(false);
+  const {weatherData} = useWeather();
+  const {longitude, latitude, location} = weatherData;
 
   const handleOnFavourite = () => {
-    toggleFavourite(!favourite);
+    toggleFavourite(!isFavourite);
+    const found = favourites.find(fav => fav.location === location);
+    if (!found) {
+      addToFavourite(longitude, latitude, location);
+    } else {
+      removeFromFavourite(location)
+    }
   };
 
   return (
@@ -20,7 +29,7 @@ export default function AddToFavourite() {
           onClick={handleOnFavourite}
         >
           <span>Add to Favourite</span>
-          <img src={favourite ? RedHeartIcon : HeartIcon} alt="heart" />
+          <img src={isFavourite ? RedHeartIcon : HeartIcon} alt="heart" />
         </button>
       </div>
     </div>

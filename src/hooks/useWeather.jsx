@@ -38,7 +38,6 @@ const useWeather = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       const updateWeatherData = {
         ...weatherData,
