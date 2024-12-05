@@ -1,15 +1,20 @@
-import { useLocalStorage } from "../hooks/index.js";
+import { useLocalStorage, useWeather } from "../hooks/index.js";
 import { FavouriteContext } from "../context/index.js";
 
 const FavouriteProvider = ({ children }) => {
-  const [favourites, setFavourites] = useLocalStorage("favorites", []);
+  const [favourites, setFavourites] = useLocalStorage("favourites", []);
+  const { weatherData, loading, error } = useWeather();
+  console.log(favourites);
 
   const addToFavourites = (longitude, latitude, location) => {
-    setFavourites(...favourites, {
-      longitude: longitude,
-      latitude: latitude,
-      location: location,
-    });
+    setFavourites([
+      ...favourites,
+      {
+        longitude: longitude,
+        latitude: latitude,
+        location: location,
+      },
+    ]);
   };
 
   const removeFromFavourites = (location) => {
@@ -21,7 +26,7 @@ const FavouriteProvider = ({ children }) => {
 
   return (
     <FavouriteContext.Provider
-      value={{ favourites, addToFavourites, removeFromFavourites }}
+      value={{ addToFavourites, removeFromFavourites, favourites }}
     >
       {children}
     </FavouriteContext.Provider>

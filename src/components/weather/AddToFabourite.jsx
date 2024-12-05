@@ -1,25 +1,30 @@
 import RedHeartIcon from "../../assets/heart-red.svg";
 import HeartIcon from "../../assets/heart.svg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FavouriteContext } from "../../context/index.js";
-import {useWeather} from "../../hooks/index.js";
+import { useWeather } from "../../hooks/index.js";
 
 export default function AddToFavourite() {
-  const { addToFavourite, removeFromFavourite, favourites } =
+  const { addToFavourites, removeFromFavourites, favourites } =
     useContext(FavouriteContext);
   const [isFavourite, toggleFavourite] = useState(false);
-  const {weatherData} = useWeather();
-  const {longitude, latitude, location} = weatherData;
+  const { weatherData } = useWeather();
+  const { longitude, latitude, location } = weatherData;
 
   const handleOnFavourite = () => {
     toggleFavourite(!isFavourite);
-    const found = favourites.find(fav => fav.location === location);
+    const found = favourites.find((fav) => fav.location === location);
     if (!found) {
-      addToFavourite(longitude, latitude, location);
+      addToFavourites(latitude, longitude, location);
     } else {
-      removeFromFavourite(location)
+      removeFromFavourites(location);
     }
   };
+
+  useEffect(() => {
+    const found = favourites.find((fav) => fav.location === location);
+    toggleFavourite(true);
+  }, []);
 
   return (
     <div className="md:col-span-2">
