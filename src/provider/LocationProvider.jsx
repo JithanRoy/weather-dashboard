@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {LocationContext} from "../context/index.js";
 
 const LocationProvider = ({ children }) => {
   const [selectedLocation, setSelectedLocation] = useState({
@@ -7,11 +8,11 @@ const LocationProvider = ({ children }) => {
     latitude: 0,
   });
   return (
-    <LocationProvider.Provider
+    <LocationContext.Provider
       value={{ selectedLocation, setSelectedLocation }}
     >
       {children}
-    </LocationProvider.Provider>
+    </LocationContext.Provider>
   );
 };
 

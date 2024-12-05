@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { WeatherContext } from "../../context/index.js";
 
 export default function WeatherBoard() {
-  const { weatherData, loading } = useContext(WeatherContext);
+  const { loading } = useContext(WeatherContext);
   return (
     <section className="">
       <div className="container">

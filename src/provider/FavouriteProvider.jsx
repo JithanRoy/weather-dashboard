@@ -1,10 +1,9 @@
-import { useLocalStorage, useWeather } from "../hooks/index.js";
+import { useLocalStorage } from "../hooks/index.js";
 import { FavouriteContext } from "../context/index.js";
 
+// eslint-disable-next-line react/prop-types
 const FavouriteProvider = ({ children }) => {
   const [favourites, setFavourites] = useLocalStorage("favourites", []);
-  const { weatherData, loading, error } = useWeather();
-  console.log(favourites);
 
   const addToFavourites = (longitude, latitude, location) => {
     setFavourites([
