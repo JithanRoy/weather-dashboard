@@ -1,5 +1,5 @@
-import {useContext, useEffect, useState} from "react";
-import {LocationContext} from "../context/index.js";
+import { useContext, useEffect, useState } from "react";
+import { LocationContext } from "../context/index.js";
 
 const useWeather = () => {
   const [weatherData, setWeatherData] = useState({
@@ -15,6 +15,7 @@ const useWeather = () => {
     longitude: "",
     latitude: "",
   });
+
   const [loading, setLoading] = useState({
     state: false,
     message: "",
@@ -22,7 +23,7 @@ const useWeather = () => {
 
   const [error, setError] = useState(null);
 
-  const { selectedLocation, setSelectedLocation } = useContext(LocationContext);
+  const { selectedLocation } = useContext(LocationContext);
 
   const fetchWeatherData = async (latitude, longitude) => {
     try {
@@ -35,6 +36,7 @@ const useWeather = () => {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_WEATHER_API_KEY}&units=metric`,
       );
+
       if (!response.ok) {
         const errorMessage = `Fetching weather data failed: ${response.status}`;
         throw new Error(errorMessage);
@@ -71,16 +73,20 @@ const useWeather = () => {
   useEffect(() => {
     setLoading({
       loading: true,
-      message: "Finding location..."
-    })
-    if(selectedLocation.latitude && selectedLocation.longitude) {
+      message: "Finding location...",
+    });
+
+    if (
+      selectedLocation.latitude !== null &&
+      selectedLocation.longitude !== null
+    ) {
       fetchWeatherData(selectedLocation.latitude, selectedLocation.longitude);
     } else {
       navigator.geolocation.getCurrentPosition(function (position) {
         fetchWeatherData(position.coords.latitude, position.coords.longitude);
       });
     }
-  }, [selectedLocation]);
+  }, [selectedLocation?.longitude, selectedLocation?.latitude]);
 
   return {
     weatherData,

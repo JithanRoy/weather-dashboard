@@ -9,8 +9,8 @@ const FavouriteProvider = ({ children }) => {
     setFavourites([
       ...favourites,
       {
-        longitude: longitude,
         latitude: latitude,
+        longitude: longitude,
         location: location,
       },
     ]);

@@ -8,6 +8,7 @@ export default function AddToFavourite() {
   const { addToFavourites, removeFromFavourites, favourites } =
     useContext(FavouriteContext);
   const [isFavourite, toggleFavourite] = useState(false);
+
   const { weatherData } = useWeather();
   const { longitude, latitude, location } = weatherData;
 
@@ -23,8 +24,8 @@ export default function AddToFavourite() {
 
   useEffect(() => {
     const found = favourites.find((fav) => fav.location === location);
-    toggleFavourite(!isFavourite);
-  }, []);
+    found && toggleFavourite(!!found);
+  }, [favourites, location]);
 
   return (
     <div className="md:col-span-2">

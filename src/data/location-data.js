@@ -1,33 +1,33 @@
 const data = [
   {
     location: "London",
-    latitude: 51.5073219,
-    longitude: -0.1276474,
+    latitude: 51.5,
+    longitude: -0.12,
   },
   {
     location: "Kolkata",
-    latitude: 22.5726723,
-    longitude: 88.3638815,
+    latitude: 22.57,
+    longitude: 88.36,
   },
   {
     location: "Dhaka",
-    latitude: 23.777176,
-    longitude: 90.399452,
+    latitude: 23.8041,
+    longitude: 90.4152,
   },
   {
     location: "Singapore",
-    latitude: 1.2899175,
-    longitude: 103.8519072,
+    latitude: 1.28,
+    longitude: 103.85,
   },
   {
     location: "New York",
-    latitude: 40.7127281,
-    longitude: -74.0060152,
+    latitude: 40.71,
+    longitude: -74.0,
   },
   {
     location: "Toronto",
-    latitude: 43.6534817,
-    longitude: -79.3839347,
+    latitude: 43.65,
+    longitude: -79.38,
   },
 ];
 
